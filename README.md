@@ -6,6 +6,7 @@ This tool converts `.pcap` files to GRL supported datasets by mapping IP address
 
 ## Quick Start
 - Install tshark: `sudo apt-get install tshark`
+- Install redis: `sudo apt install redis-server`
 - Install requirements: `pip3 install -r requirements.txt`
 - Change permissions of `run.sh`: `chmod +x run.sh`
 - Execute the script giving the `.pcap` file as an argument: `./run.sh filename.pcap`

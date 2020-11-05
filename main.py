@@ -1,5 +1,8 @@
 import argparse
 import re
+import redis
+
+r = redis.Redis(host='localhost', port=6379, db=0)
 
 def parse_args():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -29,10 +32,12 @@ def process(filename: str):
                 if src not in processed_ips:
                     processed_ips.add(src)
                     ipsDict[src] = idx
+                    r.set(idx, src)
                     idx += 1
                 if dst not in processed_ips:
                     processed_ips.add(dst)
                     ipsDict[dst] = idx
+                    r.set(idx, dst)
                     idx += 1
             edges.add((ipsDict[src], ipsDict[dst]))
     return len(processed_ips), edges
